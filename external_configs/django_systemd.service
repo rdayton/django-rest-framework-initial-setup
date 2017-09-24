@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn django_rest_framework daemon
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/html/django_rest_framework
+ExecStart=/var/www/html/django_rest_framework/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/html/django_rest_framework/gunicornsocket.sock initial.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
